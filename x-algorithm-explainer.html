@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>X Algorithm Explainer and Social Media Strategy</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #101828;
+      --muted: #5f6b7a;
+      --line: #dbe3ef;
+      --brand: #111827;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --good: #047857;
+      --good-soft: #d1fae5;
+      --bad: #b42318;
+      --bad-soft: #fee4e2;
+      --shadow: 0 22px 55px rgba(15, 23, 42, 0.11);
+      --radius: 22px;
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 34rem),
+        linear-gradient(180deg, #eef4ff 0%, var(--bg) 24rem);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 56px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid rgba(37, 99, 235, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #1d4ed8;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 22px 0 16px;
+      font-size: clamp(2.4rem, 7vw, 5.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    .hero-lede {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.06rem, 2vw, 1.35rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 36px;
+    }
+
+    .card {
+      border: 1px solid rgba(219, 227, 239, 0.92);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 28px;
+    }
+
+    .hero-card h2,
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.6rem, 3vw, 2.55rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .quick-take {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+    }
+
+    .quick-take strong {
+      display: block;
+      font-size: 2.2rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .quick-take span {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: 12px 0 38px;
+      padding: 10px;
+      border: 1px solid rgba(219, 227, 239, 0.82);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .nav a {
+      display: inline-flex;
+      margin: 0 4px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      color: var(--brand);
+      font-size: 0.93rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav a:hover,
+    .nav a:focus {
+      background: var(--accent-soft);
+      outline: none;
+    }
+
+    .section {
+      margin: 0 0 30px;
+      padding: 30px;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: max-content;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #1e40af;
+      font-weight: 800;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      position: relative;
+      min-height: 210px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .step::after {
+      content: ">";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #fff;
+      text-align: center;
+      line-height: 23px;
+      font-weight: 900;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    .step-number {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin: 18px 0 8px;
+      font-size: 1.05rem;
+      line-height: 1.18;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .signals {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .signal-panel {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .signal-panel h3 {
+      margin: 0 0 14px;
+      font-size: 1.22rem;
+      letter-spacing: -0.02em;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .chip {
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .chip.good {
+      background: var(--good-soft);
+      color: var(--good);
+    }
+
+    .chip.bad {
+      background: var(--bad-soft);
+      color: var(--bad);
+    }
+
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .strategy {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .strategy h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .strategy p {
+      margin: 0;
+      font-size: 0.96rem;
+    }
+
+    .playbook {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+    }
+
+    .checklist {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .checklist h3 {
+      margin: 0 0 14px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 12px 0;
+      color: var(--muted);
+    }
+
+    .check input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      accent-color: var(--accent);
+    }
+
+    .templates {
+      display: grid;
+      gap: 12px;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 16px 18px;
+      font-weight: 900;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--line);
+      background: #f8fbff;
+    }
+
+    .template-copy {
+      margin: 0;
+      padding: 18px;
+      color: #334155;
+      font-family:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", monospace;
+      white-space: pre-wrap;
+    }
+
+    .caveat {
+      padding: 20px;
+      border: 1px solid #fed7aa;
+      border-radius: 18px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+
+    .caveat strong {
+      color: #9a3412;
+    }
+
+    .footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #fff;
+      font: inherit;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--brand);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .playbook,
+      .signals {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline,
+      .strategy-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .step::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      .section,
+      .hero-card,
+      .quick-take {
+        padding: 20px;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .pipeline,
+      .strategy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        border-radius: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <span class="eyebrow">Codebase-backed explainer</span>
+      <h1>How the X algorithm thinks, and how to post for it</h1>
+      <p class="hero-lede">
+        A practical, non-technical guide based on this repository's For You feed
+        architecture: Thunder for in-network posts, Phoenix for discovery, and a
+        Grok-derived transformer that predicts what each viewer is likely to do.
+      </p>
+
+      <div class="hero-grid">
+        <section class="card hero-card" aria-labelledby="main-takeaway">
+          <h2 id="main-takeaway">The main idea</h2>
+          <p>
+            X does not simply rank posts by likes. The feed first gathers
+            candidates, predicts many kinds of engagement for each viewer, then
+            filters and diversifies the result. The best strategy is to create
+            posts that earn real conversation, attention, sharing, follows, and
+            low negative feedback from the right audience.
+          </p>
+          <div class="button-row">
+            <a class="button" href="#strategy">Jump to strategy</a>
+            <a class="button secondary" href="#pipeline">See the pipeline</a>
+          </div>
+        </section>
+
+        <aside class="card quick-take" aria-label="Quick facts">
+          <div>
+            <strong>2</strong>
+            <span>candidate sources: followed accounts and discovery posts</span>
+          </div>
+          <div>
+            <strong>19</strong>
+            <span>modeled engagement-style signals in the weighted scorer code</span>
+          </div>
+          <div>
+            <strong>1</strong>
+            <span>simple rule: be relevant enough to earn meaningful action</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Page sections">
+      <a href="#pipeline">Pipeline</a>
+      <a href="#signals">Signals</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#playbook">Playbook</a>
+      <a href="#caveats">Caveats</a>
+    </nav>
+
+    <section id="pipeline" class="card section">
+      <div class="section-header">
+        <div>
+          <span class="pill">How ranking works</span>
+          <h2>The For You feed in five steps</h2>
+          <p>
+            The repository's `home-mixer` pipeline combines candidate retrieval,
+            hydration, filtering, scoring, selection, and final safety checks.
+          </p>
+        </div>
+      </div>
+
+      <div class="pipeline">
+        <article class="step">
+          <span class="step-number">1</span>
+          <h3>Understand the viewer</h3>
+          <p>
+            Query hydrators fetch recent engagement history, following data, and
+            user features.
+          </p>
+        </article>
+        <article class="step">
+          <span class="step-number">2</span>
+          <h3>Gather candidates</h3>
+          <p>
+            Thunder supplies in-network posts. Phoenix Retrieval finds
+            out-of-network posts through similarity search.
+          </p>
+        </article>
+        <article class="step">
+          <span class="step-number">3</span>
+          <h3>Filter obvious misses</h3>
+          <p>
+            The system removes duplicates, old posts, self-posts, muted content,
+            blocked authors, already-seen posts, and inaccessible content.
+          </p>
+        </article>
+        <article class="step">
+          <span class="step-number">4</span>
+          <h3>Predict engagement</h3>
+          <p>
+            Phoenix predicts actions like reply, repost, click, share, dwell,
+            follow, and negative feedback.
+          </p>
+        </article>
+        <article class="step">
+          <span class="step-number">5</span>
+          <h3>Rank and diversify</h3>
+          <p>
+            Scores are weighted, repeated authors are dampened, out-of-network
+            posts are adjusted, and top candidates are selected.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="signals" class="card section">
+      <span class="pill">What the model rewards</span>
+      <h2>Signals to create for, and signals to avoid</h2>
+      <p>
+        The weighted scorer combines many predicted actions. Exact production
+        weights are not present in this repository, so this is about direction,
+        not secret numeric formulas.
+      </p>
+
+      <div class="signals">
+        <div class="signal-panel">
+          <h3>Positive signals</h3>
+          <div class="chips">
+            <span class="chip good">Replies</span>
+            <span class="chip good">Reposts</span>
+            <span class="chip good">Quotes</span>
+            <span class="chip good">Likes</span>
+            <span class="chip good">Clicks</span>
+            <span class="chip good">Profile clicks</span>
+            <span class="chip good">Dwell</span>
+            <span class="chip good">Shares</span>
+            <span class="chip good">DM shares</span>
+            <span class="chip good">Copy-link shares</span>
+            <span class="chip good">Follows</span>
+            <span class="chip good">Qualified video views</span>
+          </div>
+        </div>
+
+        <div class="signal-panel">
+          <h3>Negative signals</h3>
+          <div class="chips">
+            <span class="chip bad">Not interested</span>
+            <span class="chip bad">Mute author</span>
+            <span class="chip bad">Block author</span>
+            <span class="chip bad">Report</span>
+            <span class="chip bad">Spam-like repetition</span>
+            <span class="chip bad">Policy or safety violations</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="strategy" class="card section">
+      <span class="pill">Creator strategy</span>
+      <h2>A posting strategy anyone can follow</h2>
+      <p>
+        Do not try to "hack" the algorithm. Give the model better reasons to
+        predict that your post will satisfy a specific viewer.
+      </p>
+
+      <div class="strategy-grid">
+        <article class="strategy">
+          <h3>1. Pick a clear lane</h3>
+          <p>
+            Choose one to three topics you want to be known for. Clear topical
+            identity helps discovery systems match you with interested people.
+          </p>
+        </article>
+        <article class="strategy">
+          <h3>2. Write for replies</h3>
+          <p>
+            Ask useful, specific questions. Invite examples, tradeoffs, and
+            opinions that start real conversation.
+          </p>
+        </article>
+        <article class="strategy">
+          <h3>3. Earn dwell time</h3>
+          <p>
+            Use short stories, lists, before-and-after breakdowns, and practical
+            frameworks that make people pause and read.
+          </p>
+        </article>
+        <article class="strategy">
+          <h3>4. Be shareable</h3>
+          <p>
+            Package ideas so someone would send them to a friend: checklists,
+            templates, definitions, examples, and useful contrasts.
+          </p>
+        </article>
+        <article class="strategy">
+          <h3>5. Build follower gravity</h3>
+          <p>
+            In-network posts matter structurally. Make your bio, pinned post,
+            and recurring value promise obvious.
+          </p>
+        </article>
+        <article class="strategy">
+          <h3>6. Avoid negative feedback</h3>
+          <p>
+            Misleading hooks, rage bait, repetition, and irrelevant tagging can
+            earn mutes, blocks, reports, and "not interested" actions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="playbook" class="card section">
+      <span class="pill">Repeatable playbook</span>
+      <h2>The simple weekly operating system</h2>
+      <div class="playbook">
+        <div class="checklist">
+          <h3>Daily checklist</h3>
+          <label class="check">
+            <input type="checkbox">
+            <span>Publish 2 or 3 original posts in your topic lane.</span>
+          </label>
+          <label class="check">
+            <input type="checkbox">
+            <span>Make one post designed to start replies.</span>
+          </label>
+          <label class="check">
+            <input type="checkbox">
+            <span>Make one post useful enough to save, share, or send.</span>
+          </label>
+          <label class="check">
+            <input type="checkbox">
+            <span>Leave 15 thoughtful replies under relevant accounts.</span>
+          </label>
+          <label class="check">
+            <input type="checkbox">
+            <span>Respond to early comments to deepen the conversation.</span>
+          </label>
+          <label class="check">
+            <input type="checkbox">
+            <span>Review which posts produced follows, replies, and profile visits.</span>
+          </label>
+        </div>
+
+        <div class="templates">
+          <details open>
+            <summary>Conversation starter</summary>
+            <pre class="template-copy">Most people approach [topic] backwards.
+
+They do:
+1. [common mistake]
+2. [common mistake]
+3. [common mistake]
+
+The better order:
+1. [better step]
+2. [better step]
+3. [better step]
+
+What would you change?</pre>
+          </details>
+
+          <details>
+            <summary>Dwell-time breakdown</summary>
+            <pre class="template-copy">I spent [time period] learning [topic].
+
+Here are the [number] lessons I wish I had on day one:
+
+1. [lesson]
+2. [lesson]
+3. [lesson]
+
+The counterintuitive part:
+[short explanation]</pre>
+          </details>
+
+          <details>
+            <summary>Shareable checklist</summary>
+            <pre class="template-copy">Before you [do action], check these:
+
+- [item]
+- [item]
+- [item]
+- [item]
+- [item]
+
+If you only remember one thing:
+[simple takeaway]</pre>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="caveats" class="card section">
+      <span class="pill">Important context</span>
+      <h2>What this explainer can and cannot claim</h2>
+      <div class="caveat">
+        <p>
+          <strong>This is not a promise of reach.</strong> It is a practical
+          interpretation of the repository's architecture and visible scorer
+          behavior. Exact production weights, thresholds, safety rules, and
+          experimentation layers are not fully visible in this checkout.
+        </p>
+        <p>
+          Treat specific public claims about exact 2026 weights with caution
+          unless X publishes them directly. The safer strategy is durable:
+          relevance, conversation, attention, sharing, follows, and low negative
+          feedback.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Based on repository files including README.md, phoenix/README.md,
+      home-mixer/candidate_pipeline/phoenix_candidate_pipeline.rs, and
+      home-mixer/scorers/*.rs.
+    </footer>
+  </main>
+
+  <script>
+    const checks = document.querySelectorAll('.check input');
+    const storageKey = 'x-algorithm-explainer-checklist';
+    const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+    checks.forEach((check, index) => {
+      check.checked = Boolean(saved[index]);
+      check.addEventListener('change', () => {
+        const state = Array.from(checks).map((item) => item.checked);
+        localStorage.setItem(storageKey, JSON.stringify(state));
+      });
+    });
+  </script>
+</body>
+</html>
