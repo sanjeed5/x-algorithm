@@ -8,7 +8,19 @@ This repository is configured as a static Cloudflare Pages site.
 - Static output directory: `public`
 - Wrangler config: `wrangler.toml`
 
-## Deploy with Wrangler
+## If your Cloudflare deploy command is `npx wrangler deploy`
+
+The `wrangler.toml` file includes:
+
+```toml
+[assets]
+directory = "./public"
+```
+
+That lets Cloudflare's Workers deploy command upload the static HTML assets
+from `public`.
+
+## Deploy to Pages with Wrangler
 
 For local interactive deployment, authenticate once:
 
